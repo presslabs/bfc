@@ -161,3 +161,10 @@ RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channe
 ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 
 COPY utils/ /usr/local/bin/
+
+ENV KUBEBUILDER_VERSION="1.0.5"
+ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
+RUN curl -sL -o kubebuilder.tar.gz https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_${KUBEBUILDER_VERSION}_linux_amd64.tar.gz \
+    && mkdir -p /usr/local/kubebuilder \
+    && tar -C /usr/local/kubebuilder -xzvf kubebuilder.tar.gz --strip-components=1 \
+    && rm kubebuilder.tar.gz
