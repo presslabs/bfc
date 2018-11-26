@@ -84,7 +84,9 @@ RUN curl -sL -o /tmp/pyenv.tar.gz "https://github.com/pyenv/pyenv/archive/v${PYE
     && tar -zxf /tmp/pyenv.tar.gz -C "${PYENV_ROOT}" --strip-components=1 \
     && rm /tmp/pyenv.tar.gz \
     && for v in ${PYTHON_VERSIONS} ; do ./.pyenv/bin/pyenv install $v ; done \
-    && ./.pyenv/bin/pyenv global "$(echo "${PYTHON_VERSIONS}" | awk '{print $1}')"
+    && ./.pyenv/bin/pyenv global \
+        "$(echo "${PYTHON_VERSIONS}" | grep -Eo \\b2.[[:digit:]]+.[[:digit:]]+ | head -n1)" \
+        "$(echo "${PYTHON_VERSIONS}" | grep -Eo \\b3.[[:digit:]]+.[[:digit:]]+ | head -n1)"
 
 ENV GOPATH="${HOME}/go"
 ENV PATH="${PYENV_ROOT}/shims:${NODENV_ROOT}/shims:${GOENV_ROOT}/shims:/home/build/bin:${GOPATH}/bin:${PYENV_ROOT}/bin:${NODENV_ROOT}/bin:${GOENV_ROOT}/bin:${PATH}"
