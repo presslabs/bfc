@@ -50,6 +50,11 @@ COPY --from=protobuf-build /tmp/include/ /usr/local/include/
 ENV HOME=/root
 WORKDIR /root
 
+# install unzip
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        unzip=6.0*
+
 # install goenv and go
 ENV GOENV_TOOL_VERSION=1.23.0
 ENV GOENV_ROOT="${HOME}/.goenv"
