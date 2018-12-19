@@ -51,9 +51,11 @@ ENV HOME=/root
 WORKDIR /root
 
 # install unzip
-RUN apt-get update \
+RUN set -ex \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
-        unzip=6.0*
+        unzip=6.0* \
+    && rm -rf /var/lib/apt/lists/*
 
 # install goenv and go
 ENV GOENV_TOOL_VERSION=1.23.0
