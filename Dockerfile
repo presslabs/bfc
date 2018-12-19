@@ -4,7 +4,6 @@ ENV PROTOTOOL_VERSION=1.3.0
 ENV PROTOC_GEN_GO_VERSION=1.2.0
 ENV GRPC_VERSION=1.17.0
 ENV PROTOC_GEN_LINT_VERSION=0.2.1
-ENV TS_PROTOC_GEN_VERSION=0.8.0
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -89,10 +88,10 @@ RUN curl -sL -o /tmp/nodenv.tar.gz "https://github.com/nodenv/nodenv/archive/v${
     && curl -sL "https://github.com/nodenv/nodenv-default-packages/archive/v${NODENV_DEFAULT_PKGS_TOOL_VERSION}.tar.gz" | \
         tar -zxf - -C "${NODENV_ROOT}/plugins/nodenv-default-packages" --strip-components=1 \
     && { \
-         echo 'yarn'; \
-         echo 'ts-protoc-gen@^${TS_PROTOC_GEN_VERSION}'; \
-         echo 'grunt-cli'; \
-         echo 'gulp-cli'; \
+         echo "yarn"; \
+         echo "ts-protoc-gen@0.8.0"; \
+         echo "grunt-cli"; \
+         echo "gulp-cli"; \
     } > ${NODENV_ROOT}/default-packages \
     && for v in ${NODE_VERSIONS} ; do ./.nodenv/bin/nodenv install $v ; done \
     && ./.nodenv/bin/nodenv global "$(echo "${NODE_VERSIONS}" | awk '{print $1}')"
