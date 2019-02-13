@@ -1,50 +1,5 @@
-FROM golang:1.11-stretch as protobuf-build
-ENV PROTOC_VERSION=3.6.1
-ENV PROTOTOOL_VERSION=1.3.0
-ENV PROTOC_GEN_GO_VERSION=1.2.0
-ENV GRPC_VERSION=1.17.0
-ENV PROTOC_GEN_LINT_VERSION=0.2.1
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        unzip=6.0*
-
-WORKDIR /tmp
-
-RUN curl -sL -o protoc.zip "https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-$(uname -s)-$(uname -m).zip" \
-    && unzip protoc.zip \
-    && mv bin/* /go/bin \
-    && git clone --depth=1 https://github.com/googleapis/googleapis \
-    && mv googleapis/google/* include/google
-
-RUN curl -sL -o /go/bin/prototool "https://github.com/uber/prototool/releases/download/v${PROTOTOOL_VERSION}/prototool-$(uname -s)-$(uname -m)" \
-    && chmod +x /go/bin/prototool
-
-RUN go get -d -u github.com/golang/protobuf/protoc-gen-go \
-    && git -C ${GOPATH}/src/github.com/golang/protobuf checkout v${PROTOC_GEN_GO_VERSION} --quiet \
-    && go install github.com/golang/protobuf/protoc-gen-go \
-    && git -C ${GOPATH}/src/github.com/golang/protobuf checkout master --quiet
-
-RUN go get -d -u google.golang.org/grpc \
-    && git -C ${GOPATH}/src/google.golang.org/grpc checkout v${GRPC_VERSION} --quiet \
-    && go install google.golang.org/grpc \
-    && git -C ${GOPATH}/src/google.golang.org/grpc checkout master --quiet
-
-RUN go get -d -u github.com/ckaznocha/protoc-gen-lint \
-    && git -C ${GOPATH}/src/github.com/ckaznocha/protoc-gen-lint checkout v${PROTOC_GEN_LINT_VERSION} --quiet \
-    && go install github.com/ckaznocha/protoc-gen-lint \
-    && git -C ${GOPATH}/src/github.com/ckaznocha/protoc-gen-lint checkout master --quiet
-
-RUN go get -u github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
-RUN go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
-
-################################################################################
-
 FROM buildpack-deps:stretch as bfc-base
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-COPY --from=protobuf-build /go/bin/* /usr/local/bin/
-COPY --from=protobuf-build /tmp/include/ /usr/local/include/
 
 ENV HOME=/root
 WORKDIR /root
@@ -89,7 +44,6 @@ RUN curl -sL -o /tmp/nodenv.tar.gz "https://github.com/nodenv/nodenv/archive/v${
         tar -zxf - -C "${NODENV_ROOT}/plugins/nodenv-default-packages" --strip-components=1 \
     && { \
          echo "yarn"; \
-         echo "ts-protoc-gen@0.8.0"; \
          echo "grunt-cli"; \
          echo "gulp-cli"; \
     } > ${NODENV_ROOT}/default-packages \
