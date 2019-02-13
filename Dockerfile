@@ -8,7 +8,15 @@ WORKDIR /root
 RUN set -ex \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        unzip=6.0* \
+        unzip=6.0* apt-transport-https=1.4* \
+    && rm -rf /var/lib/apt/lists/*
+
+# install php
+RUN curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
+    && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        php7.2-cli\
     && rm -rf /var/lib/apt/lists/*
 
 # install goenv and go
