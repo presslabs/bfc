@@ -61,3 +61,14 @@ if [ ! -z "$SSH_KEY" ] ; then
     echo "Installed ssh key into $HOME/.ssh/id_rsa"
     run ssh-keygen -y -f "$HOME/.ssh/id_rsa"
 fi
+
+if [[ ! -z "${GIT_USER}" && ! -z "${GIT_PASSWORD}" ]] ; then
+    git config --global user.email ${GIT_EMAIL:-no-reply@presslabs.com}
+    git config --global user.name $GIT_USER
+
+    cat <<EOF >> ~/.netrc
+machine ${GIT_HOST:-github.com}
+       login ${GIT_USER}
+       password ${GIT_PASSWORD}
+EOF
+fi
