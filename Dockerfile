@@ -105,7 +105,7 @@ RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/do
     && chown root:root /usr/local/bin/sops
 
 # install kubernetes helm
-ENV HELM_VERSION="2.11.0"
+ENV HELM_VERSION="2.13.0"
 RUN curl -sL -o helm.tar.gz "https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf helm.tar.gz --strip-components 1 linux-amd64/helm \
     && rm helm.tar.gz \
