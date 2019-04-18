@@ -59,9 +59,9 @@ RUN curl -sL -o /tmp/nodenv.tar.gz "https://github.com/nodenv/nodenv/archive/v${
     && ./.nodenv/bin/nodenv global "$(echo "${NODE_VERSIONS}" | awk '{print $1}')"
 
 # install pyenv and python
-ENV PYENV_TOOL_VERSION=1.2.8
+ENV PYENV_TOOL_VERSION=1.2.11
 ENV PYENV_ROOT="${HOME}/.pyenv"
-ENV PYTHON_VERSIONS="3.7.1 2.7.15"
+ENV PYTHON_VERSIONS="3.7.3 2.7.16"
 RUN curl -sL -o /tmp/pyenv.tar.gz "https://github.com/pyenv/pyenv/archive/v${PYENV_TOOL_VERSION}.tar.gz" \
     && mkdir -p "${PYENV_ROOT}" \
     && tar -zxf /tmp/pyenv.tar.gz -C "${PYENV_ROOT}" --strip-components=1 \
