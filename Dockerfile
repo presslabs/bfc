@@ -36,10 +36,10 @@ RUN curl -sL -o /tmp/goenv.tar.gz "https://github.com/syndbg/goenv/archive/${GOE
 
 # install nodenv and node
 ENV NODENV_TOOL_VERSION=1.1.2
-ENV NODENV_BUILD_TOOL_VERSION=4.0.0
+ENV NODENV_BUILD_TOOL_VERSION=4.4.5
 ENV NODENV_DEFAULT_PKGS_TOOL_VERSION=0.2.1
 ENV NODENV_ROOT="${HOME}/.nodenv"
-ENV NODE_VERSIONS="10.13.0"
+ENV NODE_VERSIONS="10.15.3"
 RUN curl -sL -o /tmp/nodenv.tar.gz "https://github.com/nodenv/nodenv/archive/v${NODENV_TOOL_VERSION}.tar.gz" \
     && mkdir -p "${NODENV_ROOT}" \
     && tar -zxf /tmp/nodenv.tar.gz -C "${NODENV_ROOT}" --strip-components=1 \
