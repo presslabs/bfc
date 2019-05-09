@@ -100,7 +100,7 @@ RUN curl -sL -o dockerize.tar.gz "https://github.com/presslabs/dockerize/release
     && chown root:root /usr/local/bin/dockerize
 
 # install mozilla sops
-ENV SOPS_VERSION="3.0.5"
+ENV SOPS_VERSION="3.3.0"
 RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
     && chmod 0755 /usr/local/bin/sops \
     && chown root:root /usr/local/bin/sops
