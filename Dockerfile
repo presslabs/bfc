@@ -20,9 +20,9 @@ RUN curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/ap
     && rm -rf /var/lib/apt/lists/*
 
 # install goenv and go
-ENV GOENV_TOOL_VERSION=2.0.0beta9
+ENV GOENV_TOOL_VERSION=2.0.0beta11
 ENV GOENV_ROOT="${HOME}/.goenv"
-ENV GO_VERSIONS="1.12.4"
+ENV GO_VERSIONS="1.12.6"
 ENV GO_DEP_VERSION="0.5.1"
 ENV GOENV_DISABLE_GOPATH=1
 RUN curl -sL -o /tmp/goenv.tar.gz "https://github.com/syndbg/goenv/archive/${GOENV_TOOL_VERSION}.tar.gz" \
@@ -106,7 +106,7 @@ RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/do
     && chown root:root /usr/local/bin/sops
 
 # install kubernetes helm
-ENV HELM_VERSION="2.13.0"
+ENV HELM_VERSION="2.14.1"
 RUN curl -sL -o helm.tar.gz "https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf helm.tar.gz --strip-components 1 linux-amd64/helm \
     && rm helm.tar.gz \
@@ -121,13 +121,13 @@ RUN helm init --client-only \
     && helm repo add kubes https://presslabs-kubes.github.io/charts
 
 # install kubectl
-ENV KUBECTL_VERSION="1.11.4"
+ENV KUBECTL_VERSION="1.14.3"
 RUN curl -sL -o /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v{$KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
     && chmod 0755 /usr/local/bin/kubectl \
     && chown root:root /usr/local/bin/kubectl
 
 # install docker
-ENV DOCKER_VERSION="18.09.0"
+ENV DOCKER_VERSION="18.09.7"
 RUN set -ex \
     && curl -sL -o docker.tar.gz "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" \
     && tar -C /usr/local/bin -xzvf docker.tar.gz --strip-components 1 docker/docker \
@@ -136,7 +136,7 @@ RUN set -ex \
     && chown root:root /usr/local/bin/docker
 
 # https://cloud.google.com/sdk/docs/downloads-versioned-archives
-ENV GCLOUD_SDK_VERSION="245.0.0"
+ENV GCLOUD_SDK_VERSION="252.0.0"
 ENV CLOUDSDK_PYTHON="/usr/bin/python2.7"
 ENV GOOGLE_APPLICATION_CREDENTIALS="/run/google-credentials.json"
 RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
@@ -149,7 +149,7 @@ ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 
 COPY utils/ /usr/local/bin/
 
-ENV KUBEBUILDER_VERSION="1.0.5"
+ENV KUBEBUILDER_VERSION="1.0.8"
 ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
 RUN curl -sL -o kubebuilder.tar.gz https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_${KUBEBUILDER_VERSION}_linux_amd64.tar.gz \
     && mkdir -p /usr/local/kubebuilder \
