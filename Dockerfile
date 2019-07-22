@@ -86,7 +86,7 @@ RUN curl -sL -o /usr/local/bin/jq "https://github.com/stedolan/jq/releases/downl
     && chmod 0755 /usr/local/bin/jq \
     && chown root:root /usr/local/bin/jq
 
-ENV YQ_VERSION="2.2.0"
+ENV YQ_VERSION="2.4.0"
 RUN curl -sL -o /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" \
     && chmod 0755 /usr/local/bin/yq \
     && chown root:root /usr/local/bin/yq
@@ -100,13 +100,13 @@ RUN curl -sL -o dockerize.tar.gz "https://github.com/presslabs/dockerize/release
     && chown root:root /usr/local/bin/dockerize
 
 # install mozilla sops
-ENV SOPS_VERSION="3.3.0"
+ENV SOPS_VERSION="3.3.1"
 RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
     && chmod 0755 /usr/local/bin/sops \
     && chown root:root /usr/local/bin/sops
 
 # install kubernetes helm
-ENV HELM_VERSION="2.14.1"
+ENV HELM_VERSION="2.14.2"
 RUN curl -sL -o helm.tar.gz "https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf helm.tar.gz --strip-components 1 linux-amd64/helm \
     && rm helm.tar.gz \
@@ -121,13 +121,13 @@ RUN helm init --client-only \
     && helm repo add kubes https://presslabs-kubes.github.io/charts
 
 # install kubectl
-ENV KUBECTL_VERSION="1.14.3"
+ENV KUBECTL_VERSION="1.15.1"
 RUN curl -sL -o /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v{$KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
     && chmod 0755 /usr/local/bin/kubectl \
     && chown root:root /usr/local/bin/kubectl
 
 # install docker
-ENV DOCKER_VERSION="18.09.7"
+ENV DOCKER_VERSION="18.09.8"
 RUN set -ex \
     && curl -sL -o docker.tar.gz "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" \
     && tar -C /usr/local/bin -xzvf docker.tar.gz --strip-components 1 docker/docker \
@@ -143,7 +143,7 @@ RUN set -ex \
     && chown root:root /usr/local/bin/docker
 
 # https://cloud.google.com/sdk/docs/downloads-versioned-archives
-ENV GCLOUD_SDK_VERSION="252.0.0"
+ENV GCLOUD_SDK_VERSION="254.0.0"
 ENV CLOUDSDK_PYTHON="/usr/bin/python2.7"
 ENV GOOGLE_APPLICATION_CREDENTIALS="/run/google-credentials.json"
 RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
