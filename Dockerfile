@@ -135,6 +135,13 @@ RUN set -ex \
     && chmod +x /usr/local/bin/docker \
     && chown root:root /usr/local/bin/docker
 
+# install docker-compose
+ENV DOCKER_COMPOSE_VERSION="1.24.1"
+RUN set -ex \
+    && curl -sL -o /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
+    && chmod +x /usr/local/bin/docker-compose \
+    && chown root:root /usr/local/bin/docker
+
 # https://cloud.google.com/sdk/docs/downloads-versioned-archives
 ENV GCLOUD_SDK_VERSION="252.0.0"
 ENV CLOUDSDK_PYTHON="/usr/bin/python2.7"
