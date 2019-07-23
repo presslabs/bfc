@@ -157,6 +157,11 @@ RUN set -ex \
     && apt-get update \
     && apt-get install -y --no-install-recommends mysql-client
 
+# install composer
+RUN set -ex \
+    && curl -sS https://getcomposer.org/installer -o composer-setup.php \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
 ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 
 RUN pip3 install zipa
