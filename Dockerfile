@@ -152,6 +152,11 @@ RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channe
     && rm google-cloud-sdk.tar.gz \
     && /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
 
+# install mysql-client
+RUN set -ex \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends mysql-client
+
 ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 
 RUN pip3 install zipa
