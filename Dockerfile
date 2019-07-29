@@ -8,7 +8,7 @@ WORKDIR /root
 RUN set -ex \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        unzip=6.0* apt-transport-https=1.4* \
+        zip=3.0* unzip=6.0* apt-transport-https=1.4* \
     && rm -rf /var/lib/apt/lists/*
 
 # install php
