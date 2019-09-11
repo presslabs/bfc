@@ -16,7 +16,7 @@ RUN curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/ap
     && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        php7.2-cli\
+        php7.2-cli php-pear \
     && rm -rf /var/lib/apt/lists/*
 
 # install goenv and go
@@ -152,10 +152,10 @@ RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channe
     && rm google-cloud-sdk.tar.gz \
     && /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
 
-# install mysql-client
+# install mysql-client, gettext
 RUN set -ex \
     && apt-get update \
-    && apt-get install -y --no-install-recommends mysql-client
+    && apt-get install -y --no-install-recommends mysql-client gettext
 
 # install composer
 RUN set -ex \
