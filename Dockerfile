@@ -92,7 +92,7 @@ RUN curl -sL -o /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/down
     && chown root:root /usr/local/bin/yq
 
 # install dockerize for templating support
-ENV DOCKERIZE_VERSION="1.2.0"
+ENV DOCKERIZE_VERSION="1.3.0"
 RUN curl -sL -o dockerize.tar.gz "https://github.com/presslabs/dockerize/releases/download/v${DOCKERIZE_VERSION}/dockerize-linux-amd64-v${DOCKERIZE_VERSION}.tar.gz" \
     && tar -C /usr/local/bin -xzvf dockerize.tar.gz \
     && rm dockerize.tar.gz \

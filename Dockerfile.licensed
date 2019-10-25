@@ -1,0 +1,9 @@
+FROM gcr.io/distroless/base-debian10:debug as builder
+SHELL ["/busybox/sh", "-c"]
+ADD https://github.com/github/licensed/releases/download/2.5.0/licensed-2.5.0-linux-x64.tar.gz /
+RUN mkdir -p /licensed && tar -zxf /licensed-2.5.0-linux-x64.tar.gz -C licensed
+
+FROM golang:buster
+COPY --from=builder /licensed /usr/local/bin
+ENTRYPOINT ["/usr/local/bin/licensed"]
+CMD ["help"]
