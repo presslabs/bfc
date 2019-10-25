@@ -99,6 +99,11 @@ RUN curl -sL -o dockerize.tar.gz "https://github.com/presslabs/dockerize/release
     && chmod 0755 /usr/local/bin/dockerize \
     && chown root:root /usr/local/bin/dockerize
 
+# install prototool for protobuf related work
+ENV PROTOTOOL_VERSION="1.9.0"
+RUN curl -sL -o /usr/local/bin/prototool "https://github.com/uber/prototool/releases/download/v${PROTOTOOL_VERSION}/prototool-Linux-x86_64" \
+    && chmod +x /usr/local/bin/prototool
+
 # install mozilla sops
 ENV SOPS_VERSION="3.3.1"
 RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
