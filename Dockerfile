@@ -170,7 +170,7 @@ RUN set -ex \
 
 ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 
-RUN pip3 install zipa
+RUN pip3 install zipa pyyaml
 COPY utils/ /usr/local/bin/
 
 ENV KUBEBUILDER_VERSION="1.0.8"
