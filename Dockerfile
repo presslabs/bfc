@@ -111,8 +111,8 @@ RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/do
     && chown root:root /usr/local/bin/sops
 
 # install kubernetes helm
-ENV HELM_VERSION="2.14.2"
-RUN curl -sL -o helm.tar.gz "https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
+ENV HELM_VERSION="3.2.4"
+RUN curl -sL -o helm.tar.gz "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf helm.tar.gz --strip-components 1 linux-amd64/helm \
     && rm helm.tar.gz \
     && chmod 0755 /usr/local/bin/helm \
@@ -184,9 +184,9 @@ ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 RUN pip3 install zipa pyyaml
 COPY utils/ /usr/local/bin/
 
-ENV KUBEBUILDER_VERSION="1.0.8"
+ENV KUBEBUILDER_VERSION="2.3.1"
 ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
 RUN curl -sL -o kubebuilder.tar.gz https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_${KUBEBUILDER_VERSION}_linux_amd64.tar.gz \
     && mkdir -p /usr/local/kubebuilder \
-    && tar -C /usr/local/kubebuilder -xzvf kubebuilder.tar.gz --strip-components=1 \
+    && tar -C /usr/local/kubebuilder -xzvf kubebuilder.tar.gz --strip-components=2 \
     && rm kubebuilder.tar.gz
