@@ -186,5 +186,5 @@ ENV KUBEBUILDER_VERSION="2.3.1"
 ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
 RUN curl -sL -o kubebuilder.tar.gz https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_${KUBEBUILDER_VERSION}_linux_amd64.tar.gz \
     && mkdir -p /usr/local/kubebuilder \
-    && tar -C /usr/local/kubebuilder -xzvf kubebuilder.tar.gz --strip-components=2 \
+    && tar -C /usr/local/kubebuilder -xzvf kubebuilder.tar.gz --strip-components=1 \
     && rm kubebuilder.tar.gz
