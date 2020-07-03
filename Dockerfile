@@ -119,9 +119,7 @@ RUN curl -sL -o helm.tar.gz "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd
     && chown root:root /usr/local/bin/helm
 
 # install helm secrets plugin
-RUN helm init --client-only \
-    && helm plugin install https://github.com/futuresimple/helm-secrets \
-    && helm repo add coreos https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/ \
+RUN helm plugin install https://github.com/futuresimple/helm-secrets \
     && helm repo add presslabs https://presslabs.github.io/charts \
     && helm repo add kubes https://presslabs-kubes.github.io/charts
 
