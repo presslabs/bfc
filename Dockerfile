@@ -130,7 +130,7 @@ RUN curl -sL -o /usr/local/bin/kubectl "https://storage.googleapis.com/kubernete
     && chown root:root /usr/local/bin/kubectl
 
 # install kustomize
-ENV KUSTOMIZE_VERSION="3.2.2"
+ENV KUSTOMIZE_VERSION="3.4.0"
 RUN curl -sL -o /usr/local/bin/kustomize "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_kustomize.v${KUSTOMIZE_VERSION}_linux_amd64" \
     && chmod 0755 /usr/local/bin/kustomize \
     && chown root:root /usr/local/bin/kustomize
