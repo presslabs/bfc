@@ -1,0 +1,25 @@
+---
+kind: pipeline
+type: docker
+name: publish
+
+steps:
+- name: publish docker image
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile
+    group: publish
+    registry: quay.io
+    repo: quay.io/presslabs/bfc
+    auto_tag: true
+    username: presslabs+drone
+  environment:
+    DOCKER_PASSWORD:
+      from_secret: QUAY_TOKEN
+  when:
+    event:
+      - tag
+
+trigger:
+  ref:
+    - refs/tags/**
