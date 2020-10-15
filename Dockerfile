@@ -105,7 +105,7 @@ RUN curl -sL -o /usr/local/bin/prototool "https://github.com/uber/prototool/rele
     && chmod +x /usr/local/bin/prototool
 
 # install mozilla sops
-ENV SOPS_VERSION="3.6.1"
+ENV SOPS_VERSION="v3.6.1"
 RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
     && chmod 0755 /usr/local/bin/sops \
     && chown root:root /usr/local/bin/sops
