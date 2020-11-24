@@ -131,7 +131,7 @@ RUN curl -sL -o /usr/local/bin/kubectl "https://storage.googleapis.com/kubernete
 
 # install kustomize
 ENV KUSTOMIZE_VERSION="3.8.4"
-RUN curl -sL -o /usr/local/bin/kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" \
+RUN curl -sL -o kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf kustomize.tar.gz \
     && rm kustomize.tar.gz \
     && chmod 0755 /usr/local/bin/kustomize \
