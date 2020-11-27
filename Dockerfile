@@ -86,7 +86,7 @@ RUN curl -sL -o /usr/local/bin/jq "https://github.com/stedolan/jq/releases/downl
     && chmod 0755 /usr/local/bin/jq \
     && chown root:root /usr/local/bin/jq
 
-ENV YQ_VERSION="3.3.2"
+ENV YQ_VERSION="3.4.1"
 RUN curl -sL -o /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" \
     && chmod 0755 /usr/local/bin/yq \
     && chown root:root /usr/local/bin/yq
