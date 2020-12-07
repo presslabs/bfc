@@ -52,7 +52,7 @@ fi
 if [ ! -z "$CLUSTER" ] ; then
     require_google_credentials
     require_param "cluster"
-    require_param "project"
+    require_param "google_cloud_project"
     require_param "zone"
 
     run gcloud container clusters get-credentials "$CLUSTER" --project "$GOOGLE_CLOUD_PROJECT" --zone "$ZONE"
