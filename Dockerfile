@@ -111,8 +111,8 @@ RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/do
     && chown root:root /usr/local/bin/sops
 
 # install kubernetes helm
-ENV HELM_VERSION="3.2.4"
-RUN curl -sL -o helm.tar.gz "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
+ENV HELM_VERSION="v3.6.3"
+RUN curl -sL -o helm.tar.gz "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf helm.tar.gz --strip-components 1 linux-amd64/helm \
     && rm helm.tar.gz \
     && chmod 0755 /usr/local/bin/helm \
