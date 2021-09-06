@@ -20,9 +20,9 @@ RUN curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/ap
     && rm -rf /var/lib/apt/lists/*
 
 # install goenv and go
-ENV GOENV_TOOL_VERSION=1ffd8b8
+ENV GOENV_TOOL_VERSION=826eb32
 ENV GOENV_ROOT="${HOME}/.goenv"
-ENV GO_VERSIONS="1.16.5"
+ENV GO_VERSIONS="1.17"
 ENV GO_DEP_VERSION="0.5.4"
 ENV GOENV_DISABLE_GOPATH=1
 RUN curl -sL -o /tmp/goenv.tar.gz "https://github.com/syndbg/goenv/archive/${GOENV_TOOL_VERSION}.tar.gz" \
