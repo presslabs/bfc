@@ -163,7 +163,7 @@ RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channe
     && rm google-cloud-sdk.tar.gz \
     && /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
 
-ENV RCLONE_VERSION="1.50.2"
+ENV RCLONE_VERSION="1.56.0"
 RUN set -ex \
     && curl -sL -o rclone-v${RCLONE_VERSION}-linux-amd64.deb https://github.com/rclone/rclone/releases/download/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.deb \
     && dpkg -i rclone-v${RCLONE_VERSION}-linux-amd64.deb \
