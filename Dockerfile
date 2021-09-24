@@ -20,9 +20,9 @@ RUN curl -ssL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/ap
     && rm -rf /var/lib/apt/lists/*
 
 # install goenv and go
-ENV GOENV_TOOL_VERSION=826eb32
+ENV GOENV_TOOL_VERSION=abde869
 ENV GOENV_ROOT="${HOME}/.goenv"
-ENV GO_VERSIONS="1.17.0"
+ENV GO_VERSIONS="1.17.1"
 ENV GO_DEP_VERSION="0.5.4"
 ENV GOENV_DISABLE_GOPATH=1
 RUN curl -sL -o /tmp/goenv.tar.gz "https://github.com/syndbg/goenv/archive/${GOENV_TOOL_VERSION}.tar.gz" \
@@ -105,7 +105,7 @@ RUN curl -sL -o /usr/local/bin/prototool "https://github.com/uber/prototool/rele
     && chmod +x /usr/local/bin/prototool
 
 # install mozilla sops
-ENV SOPS_VERSION="v3.6.1"
+ENV SOPS_VERSION="v3.7.1"
 RUN curl -sL -o /usr/local/bin/sops "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux" \
     && chmod 0755 /usr/local/bin/sops \
     && chown root:root /usr/local/bin/sops
@@ -124,13 +124,13 @@ RUN helm plugin install https://github.com/futuresimple/helm-secrets \
     && helm repo add kubes https://presslabs-kubes.github.io/charts
 
 # install kubectl
-ENV KUBECTL_VERSION="1.15.1"
+ENV KUBECTL_VERSION="1.19.13"
 RUN curl -sL -o /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v{$KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
     && chmod 0755 /usr/local/bin/kubectl \
     && chown root:root /usr/local/bin/kubectl
 
 # install kustomize
-ENV KUSTOMIZE_VERSION="3.8.4"
+ENV KUSTOMIZE_VERSION="4.2.0"
 RUN curl -sL -o kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" \
     && tar -C /usr/local/bin -xzvf kustomize.tar.gz \
     && rm kustomize.tar.gz \
@@ -184,7 +184,7 @@ ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 RUN pip3 install zipa pyyaml
 COPY utils/ /usr/local/bin/
 
-ENV KUBEBUILDER_VERSION="2.3.1"
+ENV KUBEBUILDER_VERSION="2.3.2"
 ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
 RUN curl -sL -o kubebuilder.tar.gz https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_${KUBEBUILDER_VERSION}_linux_amd64.tar.gz \
     && mkdir -p /usr/local/kubebuilder \
