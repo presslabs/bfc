@@ -185,9 +185,12 @@ RUN pip3 install zipa pyyaml
 COPY utils/ /usr/local/bin/
 
 ENV KUBEBUILDER_VERSION="3.1.0"
+env K8S_VERSION="1.19.2"
 ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
-RUN curl -L -o kubebuilder https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_linux_amd64 \
-    && chmod +x kubebuilder \
+RUN curl -sL -o kubebuilder-tools.tar.gz https://storage.googleapis.com/kubebuilder-tools/kubebuilder-tools-${K8S_VERSION}-linux-amd64.tar.gz \
     && mkdir -p /usr/local/kubebuilder \
-    && mv kubebuilder /usr/local/kubebuilder/
-    
+    && tar -C /usr/local/kubebuilder -xzvf kubebuilder-tools.tar.gz --strip-components=1 \
+    && rm -r kubebuilder-tools.tar.gz \
+    && curl -sL -o kubebuilder https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_linux_amd64 \
+    && chmod +x kubebuilder \
+    && mv kubebuilder /usr/local/kubebuilder/bin/
