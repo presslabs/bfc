@@ -184,9 +184,10 @@ ENV PATH="/opt/google-cloud-sdk/bin:${PATH}"
 RUN pip3 install zipa pyyaml
 COPY utils/ /usr/local/bin/
 
-ENV KUBEBUILDER_VERSION="2.3.2"
+ENV KUBEBUILDER_VERSION="3.1.0"
 ENV PATH="${PATH}:/usr/local/kubebuilder/bin"
-RUN curl -sL -o kubebuilder.tar.gz https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_${KUBEBUILDER_VERSION}_linux_amd64.tar.gz \
+RUN curl -L -o kubebuilder https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER_VERSION}/kubebuilder_linux_amd64 \
+    && chmod +x kubebuilder \
     && mkdir -p /usr/local/kubebuilder \
-    && tar -C /usr/local/kubebuilder -xzvf kubebuilder.tar.gz --strip-components=1 \
-    && rm kubebuilder.tar.gz
+    && mv kubebuilder /usr/local/kubebuilder/
+    
