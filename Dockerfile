@@ -154,7 +154,7 @@ RUN set -ex \
     && chown root:root /usr/local/bin/docker
 
 # https://cloud.google.com/sdk/docs/downloads-versioned-archives
-ENV GCLOUD_SDK_VERSION="254.0.0"
+ENV GCLOUD_SDK_VERSION="357.0.0"
 ENV CLOUDSDK_PYTHON="/usr/bin/python2.7"
 ENV GOOGLE_APPLICATION_CREDENTIALS="/run/google-credentials.json"
 RUN curl -sL -o google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
