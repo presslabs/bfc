@@ -1,0 +1,43 @@
+---
+kind: pipeline
+name: default
+
+clone:
+  disable: true
+
+workspace:
+  base: /workspace
+  path: src/github.com/presslabs/bfc
+
+steps:
+- name: git
+  pull: default
+  image: plugins/git
+  settings:
+    depth: 0
+    tags: true
+
+- name: publish
+  pull: always
+  image: plugins/gcr
+  settings:
+    repo: gcr.io/pl-infra/bfc
+    registry: gcr.io
+    tags: 
+    - latest
+    json_key:
+      from_secret: PL_INFRA_GCR_IO_PUSH
+  when:
+    event: push
+    branch: master
+
+trigger:
+  ref:
+    - refs/pull/**
+    - refs/heads/master
+    - refs/tags/**
+---
+kind: signature
+hmac: e593173ed5289c9ecbf867472c26c13610e4d4580ba12c66039e5134212dba58
+
+...
